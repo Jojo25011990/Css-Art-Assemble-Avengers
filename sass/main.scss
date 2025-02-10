@@ -1,0 +1,202 @@
+@forward './reset';
+
+// *** Variables ***
+// *** Colors ***
+
+$color-white: #fff;
+$color-black: #000;
+
+$color-bg: #131516;
+
+$color-primary: #efebeb;
+$color-secondary: #ccc;
+
+// *** Mixins ****
+// *** Flex Center ***
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// *** Main Styles ***
+
+html {
+  @media (max-width: 540px) {
+    font-size: 52%;
+  }
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  background-color: $color-bg;
+  color: $color-white;
+  font-family: 'Smooch Sans', serif;
+  text-transform: uppercase;
+  overflow: hidden;
+
+  @include flex-center;
+}
+
+.container {
+  width: 80rem;
+  height: 80vh;
+
+  @include flex-center;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.avenger {
+  width: 40rem;
+  height: 40rem;
+  position: relative;
+
+  opacity: 0;
+  animation: moveTop 0.5s linear 1.8s forwards;
+
+  &__circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 3rem solid $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    box-shadow: 0.2rem 0.2rem 1rem $color-secondary;
+
+    &-leftSide,
+    &-rightSide {
+      width: 5.5rem;
+      height: 105%;
+      background-color: $color-white;
+      position: relative;
+    }
+
+    &-leftSide {
+      rotate: 10deg;
+      left: -2rem;
+      top: -0.8rem;
+      z-index: 20;
+    }
+
+    &-rightSide {
+      rotate: -10deg;
+      right: -2rem;
+      top: -0.8rem;
+      z-index: -1;
+    }
+
+    &-midSide {
+      position: absolute;
+      top: 22rem;
+      width: 15rem;
+      height: 5.5rem;
+      background-color: $color-white;
+      z-index: 5;
+      filter: drop-shadow(0.1rem 0.1rem 0 $color-secondary);
+
+      &::before {
+        content: '';
+        position: absolute;
+        right: -6rem;
+        top: -2.4rem;
+        width: 10rem;
+        height: 7rem;
+        background-color: transparent;
+        border-right: 5rem solid transparent;
+        border-left: 5rem solid transparent;
+        border-bottom: 9.5rem solid $color-primary;
+        rotate: 88.2deg;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+.content {
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+
+  &__heading-primary {
+    font-size: 7rem;
+    opacity: 0;
+
+    animation: moveLeft 0.5s linear 0.3s forwards;
+  }
+  &__heading-secondary {
+    font-size: 3.5rem;
+    opacity: 0;
+
+    animation: moveRight 0.5s linear 0.65s forwards;
+  }
+  &__heading-tertiary {
+    font-size: 2.5rem;
+    opacity: 0;
+
+    animation: moveBottom 0.5s linear 1.25s forwards;
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    translate: -25rem;
+    opacity: 0;
+  }
+
+  to {
+    translate: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes moveRight {
+  from {
+    translate: 25rem;
+    opacity: 0;
+  }
+
+  to {
+    translate: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes moveBottom {
+  from {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+
+  to {
+    transform: translateY(0);
+
+    opacity: 1;
+  }
+}
+
+@keyframes moveTop {
+  from {
+    opacity: 0;
+    transform: translateY(-5rem);
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+}
